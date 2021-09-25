@@ -1,7 +1,7 @@
-// CSE 110     : <Class #> / <meeting days and times>
-// Assignment  : <assignment #>
-// Author      : <name> & <studentID>
-// Description : <of the file contents>
+// CSE 110     : 74845 / ONLINE
+// Assignment  : 06
+// Author      : MORRIS, CHRIS 1223564576
+// Description : TEN METHODS-ARRAYS
 
 public class Assignment06 {
 
@@ -28,7 +28,10 @@ public class Assignment06 {
         public static void printArray(int[] inArray, String separator){
             String arrayItems = "";
             for(int i = 0; i < inArray.length; i++){
-                arrayItems += String.format("%d %s", inArray[i], separator);
+                if(i != inArray.length - 1){
+                arrayItems += String.format("%d%s", inArray[i], separator);
+                }
+                else{arrayItems += String.format("%d", inArray[i]);}     
             }
             System.out.println(arrayItems);
         }
@@ -45,7 +48,7 @@ public class Assignment06 {
     //    that takes an Array of int as an argument and returns 
     //    the value of the last element of the array.
         public static int getLast(int[] inArray){
-            int arrayLast = inArray.length - 1; 
+            int arrayLast = inArray[inArray.length - 1]; 
             return arrayLast;
         }
     
@@ -54,7 +57,7 @@ public class Assignment06 {
     //    a new array with all of the values in the argument array except the first value.
         public static int[] getAllButFirst(int[] inArray){
             int[] modifiedArray = new int[inArray.length - 1];
-            for(int i = 1; i <= inArray.length; i++ ){
+            for(int i = 1; i < inArray.length; i++ ){
                 modifiedArray[i - 1] = inArray[i];
             }
             return modifiedArray;
@@ -69,7 +72,9 @@ public class Assignment06 {
             for(int i = 0; i < inArray.length; i++){
                 tempMinValue = inArray[i];
                 tempMinIndex = i;
-                if(tempMinValue < prevMinValue){
+                if(tempMinValue <= prevMinValue){
+                    prevMinIndex = tempMinIndex;
+                    prevMinValue = tempMinValue;
                     finalMinIndex = tempMinIndex;
                 }
                 else{
@@ -91,7 +96,7 @@ public class Assignment06 {
             for(int i = 0; i < inArray.length; i++ ){
                 tempMaxValue = inArray[i];
                 tempMaxIndex = i;               
-                if(tempMaxValue > prevMaxValue){
+                if(tempMaxValue >= prevMaxValue){
                     finalMax = tempMaxIndex;
                 }
                 else{
@@ -110,9 +115,10 @@ public class Assignment06 {
     //    in the array, and return a reference to the array.
         
         public static int[] swapByIndex(int[] inArray, int index1, int index2){
-            int tempIndex = index1;
-            inArray[index1] = inArray[index2];
-            inArray[index2] = inArray[tempIndex];
+            int tempValue1 = inArray[index1];
+            int tempValue2 = inArray[index2];
+            inArray[index1] = tempValue2;
+            inArray[index2] = tempValue1;
             return inArray;
         } 
     
@@ -146,7 +152,7 @@ public class Assignment06 {
         for(int i = 0; i < inArray.length; i++){
             counter++;
         }
-        for(int i = counter - 1; i > index1; i--){
+        for(int i = counter - 1 ; i > index1; i--){
             inArray[i] = inArray[i - 1];
         }
         inArray[index1] = value;
