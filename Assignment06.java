@@ -3,6 +3,8 @@
 // Author      : MORRIS, CHRIS 1223564576
 // Description : TEN METHODS-ARRAYS
 
+import java.util.ArrayList;
+
 public class Assignment06 {
 
     public static void main(String[] args) {
@@ -67,24 +69,17 @@ public class Assignment06 {
     // 5) Write a public static method named getIndexOfMin, 
     //    that takes an Array of int as an argument and returns 
     //    the index of the least value in the array.
-        public static int getIndexOfMin(int[] inArray){
-            int tempMinValue = 0, tempMinIndex = 0, prevMinValue = 0, prevMinIndex = 0, finalMinIndex = 0;
-            for(int i = 0; i < inArray.length; i++){
-                tempMinValue = inArray[i];
-                tempMinIndex = i;
-                if(tempMinValue <= prevMinValue){
-                    prevMinIndex = tempMinIndex;
-                    prevMinValue = tempMinValue;
-                    finalMinIndex = tempMinIndex;
-                }
-                else{
-                    finalMinIndex = prevMinIndex;
-                }
-                prevMinValue = tempMinValue;
-                prevMinIndex = tempMinIndex;
+    public static int getIndexOfMin(int[] inArray){
+        int min = Integer.MAX_VALUE;
+        int index = -1;
+        for(int i = 0; i < inArray.length; i++ ){
+            if(min > inArray[i]){
+                min = inArray[i];
+                index = i;
             }
-            return finalMinIndex;
         }
+        return index;
+    }
     
     
     // 6) Write a public static method named getIndexOfMax, 
@@ -92,20 +87,15 @@ public class Assignment06 {
     //    the index of the largest value in the array.
         
         public static int getIndexOfMax(int[] inArray){
-            int tempMaxValue = 0, tempMaxIndex = 0, prevMaxValue = 0, prevMaxIndex = 0, finalMax = 0;
+            int max = Integer.MIN_VALUE;
+            int index = -1;
             for(int i = 0; i < inArray.length; i++ ){
-                tempMaxValue = inArray[i];
-                tempMaxIndex = i;               
-                if(tempMaxValue >= prevMaxValue){
-                    finalMax = tempMaxIndex;
+                if(max < inArray[i]){
+                    max = inArray[i];
+                    index = i;
                 }
-                else{
-                    finalMax = prevMaxIndex;
-                }
-                prevMaxValue = tempMaxValue;
-                prevMaxIndex = tempMaxIndex;
             }
-            return finalMax;
+            return index;
         }
     
     // 7) Write a public static method named swapByIndex, 
@@ -148,15 +138,14 @@ public class Assignment06 {
     //   in the argument array and including the third argument value 
     //   inserted at the index specified by the second argument value.
     public static int[] insertAtIndex(int[] inArray, int index1, int value){
-        int counter = 0;
+        ArrayList<Integer> tempArray = new ArrayList<Integer>();
         for(int i = 0; i < inArray.length; i++){
-            counter++;
+            tempArray.add(i, inArray[i]);
         }
-        for(int i = counter - 1 ; i > index1; i--){
-            inArray[i] = inArray[i - 1];
-        }
-        inArray[index1] = value;
-        return inArray;
+        tempArray.add(index1, value);
+        int[] finalArray = tempArray.stream().mapToInt(i->i).toArray(); 
+        return finalArray;
+    
     }
     
     //10) Write a public static method named isSorted, 
